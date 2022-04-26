@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>TP1</title>
+    <link rel="stylesheet" href="stylesheet.css">
+    <meta charset="UTF-8"> 
+</head>
+
+<body onload="display_time()">
+    <h1>Horloge SVG</h1>
+    <div class="header">
+        <h1 id="time"></h1>
+    </div>
+    <svg
+          id="clock"
+          xmlns="http://www.w3.org/2000/svg"
+          width="500"
+          height="500"
+          viewBox="0 0 500 500">
+          <circle cx="250" cy="250" r="200" fill="white" stroke="black"/>
+          <circle cx="250" cy="250" r="10" fill="blue" stroke="black"/>
+          <rect x="240" y="100" width="20" height="140"/>
+
+    </svg>
+    <script src="script.js"></script>
+</body>
+</html>
