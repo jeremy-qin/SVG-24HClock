@@ -75,7 +75,8 @@ function formatHeure() {
     `
     document.getElementById("hours").innerHTML = newHours 
     }
-    else {element.innerHTML = Hours
+    else {
+        element.innerHTML = Hours
     }
     
 }
