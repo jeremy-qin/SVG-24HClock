@@ -5,11 +5,42 @@ function display_t() {
 
 function display_time() {
     var date = new Date();
-    var date1 = date.toDateString()
-    var hour = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() 
-    document.getElementById("time").innerHTML = date1 + " " +  hour
+    var y = date.getFullYear();
+    var m = date.getMonth();
+    var d = date.getDate();
+
+    var mois = ["Janvier","Février", "Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"];
+    
+    switch (new Date().getDay()) {
+        case 0:
+          day = "Dimanche";
+          break;
+        case 1:
+          day = "Lundi";
+          break;
+        case 2:
+           day = "Mardi";
+          break;
+        case 3:
+          day = "Mercredi";
+          break;
+        case 4:
+          day = "Jeudi";
+          break;
+        case 5:
+          day = "Vendredi";
+          break;
+        case 6:
+          day = "Samedi";
+      }
+
+    var hour = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds(); 
+
+    document.getElementById("time").innerHTML = day + " " + d + " " + mois[m] + " " + y;
+    document.getElementById("clockhour").innerHTML = hour
     time = display_t()
 }
+
 
 function formatHeure() {
 
