@@ -111,3 +111,11 @@ function formatHeure() {
     }
     
 }
+
+
+function changeTemp() {
+    const temp = document.getElementsByClassName("temps");
+    for (let i = 0; i < temp.length; i++) {
+        temp[i].innerHTML = 20;
+      }
+}
