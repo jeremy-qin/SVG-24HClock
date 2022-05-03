@@ -19,9 +19,25 @@
           viewBox="0 0 500 500">
           <circle cx="250" cy="250" r="240" fill="gold" stroke="black"/>
           <circle cx="250" cy="250" r="200" fill="moccasin" stroke="black"/>
-          <circle cx="250" cy="250" r="160" fill="lightyellow" stroke="black"/>
+          <circle cx="250" cy="250" r="160" fill="#020476" stroke="black"/>
+          <circle id="day_circle" cx="250" cy="250" r="80" fill= "#020476" stroke="yellow"
+            stroke-width="160"
+            stroke-dasharray="10 502"
+            transform="rotate(-90) translate(-500)">
+            <animateTransform   id="day_cycle_rotation"
+                                attributeName="transform"
+                                begin="indefinite"
+                                attributeType="XML"
+                                type="rotate"
+                                from="-90 250 250"
+                                to="280 250 250"
+                                dur="0.1s"
+                                repeatCount="1"
+                                fill="freeze"/>
+            
+          </circle>
           <circle cx="250" cy="250" r="10" fill="blue" stroke="black"/>
-          <text id="clockhour" x="250" y="150" fill="black" style="text-anchor:middle; font-family:Ubuntu; font-weight: bold; font-size:35;">00 : 00</text>
+          <text id="clockhour" x="250" y="150" fill="red" style="text-anchor:middle; font-family:Ubuntu; font-weight: bold; font-size:35;">00 : 00</text>
           <rect x="240" y="110" width="20" height="130">
               <animateTransform attributeName="transform"
                                 attributeType="XML"

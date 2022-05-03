@@ -1,6 +1,6 @@
 function display_t() {
     var refresh = 1000;
-    time = setTimeout("display_time()", refresh)
+    time = setTimeout("display_time()", refresh);
 }
 
 function display_time() {
@@ -118,4 +118,47 @@ function changeTemp() {
     for (let i = 0; i < temp.length; i++) {
         temp[i].innerHTML = 20;
       }
+}
+
+
+function sunState(){
+  var url="https://api.openweathermap.org/data/2.5/onecall?lat=45.50884&lon=-73.58781&exclude=&appid=880e2051f8f66e8275b6bd25f116d6f3"
+  var req=new XMLHttpRequest();
+
+    req.onreadystatechange=function(){
+      if(this.readyState ==4 && this.status == 200){
+        var jSunState=JSON.parse(this.responseText);
+        var daily=jSunState.daily;
+        // sunrise data
+        var srDate = new Date(daily[1].sunrise*1000);
+        var srHour = srDate.getHours();
+        var srMin = srDate.getMinutes();
+        var srMinForm = srHour*60+srMin+60;
+        // sunset data
+        var ssDate = new Date(daily[1].sunset*1000);
+        var ssHour = ssDate.getHours();
+        var ssMin = ssDate.getMinutes();
+        var ssMinForm = ssHour*60+ssMin;
+        // Compute the ratio of duration between sunrise and sunset by a day 
+        var dayRatio = (ssMinForm-srMinForm)/1440 ;
+        // sets the form of our day circle according to the ratio
+        document.getElementById("day_circle").setAttribute("stroke-dasharray", (dayRatio*502)+" 502");    
+        const degreeOffset= 90; 
+        var daystart=((srMinForm)/1440)*360;
+        console.log(srDate);
+        console.log(ssDate);
+        console.log(srMinForm)
+        console.log(ssMinForm-srMinForm)
+        document.getElementById("day_cycle_rotation").setAttribute("to",(daystart-degreeOffset)+" 250 250");
+        var rotation= document.getElementById("day_cycle_rotation");
+        rotation.beginElement();
+      }
+  };
+  req.open("GET",url,true);
+  req.send();
+}
+
+document.body.onload = function() {
+  sunState();
+  display_t();
 }
