@@ -120,7 +120,7 @@ function changeTemp() {
       }
 }
 
-
+// Makes an api call to retrieve data, handles sun data to modify svg 
 function sunState(){
   var url="https://api.openweathermap.org/data/2.5/onecall?lat=45.50884&lon=-73.58781&exclude=&appid=880e2051f8f66e8275b6bd25f116d6f3"
   var req=new XMLHttpRequest();
@@ -129,6 +129,9 @@ function sunState(){
       if(this.readyState ==4 && this.status == 200){
         var jSunState=JSON.parse(this.responseText);
         var daily=jSunState.daily;
+        // Moon data and Moon function call
+        var moonPhase = daily[1].moon_phase;
+        moonState(moonPhase);
         // sunrise data
         var srDate = new Date(daily[1].sunrise*1000);
         var srHour = srDate.getHours();
@@ -139,16 +142,13 @@ function sunState(){
         var ssHour = ssDate.getHours();
         var ssMin = ssDate.getMinutes();
         var ssMinForm = ssHour*60+ssMin;
-        // Compute the ratio of duration between sunrise and sunset by a day 
-        var dayRatio = (ssMinForm-srMinForm)/1440 ;
+        // Data handling
+        var dayRatio = (ssMinForm-srMinForm)/1440; // Compute the ratio of duration between sunrise and sunset by a day
         // sets the form of our day circle according to the ratio
         document.getElementById("day_circle").setAttribute("stroke-dasharray", (dayRatio*502)+" 502");    
         const degreeOffset= 90; 
+        // Positions the day circle
         var daystart=((srMinForm)/1440)*360;
-        console.log(srDate);
-        console.log(ssDate);
-        console.log(srMinForm)
-        console.log(ssMinForm-srMinForm)
         document.getElementById("day_cycle_rotation").setAttribute("to",(daystart-degreeOffset)+" 250 250");
         var rotation= document.getElementById("day_cycle_rotation");
         rotation.beginElement();
@@ -158,7 +158,45 @@ function sunState(){
   req.send();
 }
 
+// handles data retrieved from Api, changes the html to show the current moon phase
+function moonState(moonphase){
+  if (moonphase == 0 || moonphase == 1 ){
+    document.getElementById("moontxt").innerHTML="New Moon";
+    return;
+  }
+  if (moonphase == 0.25){
+    document.getElementById("moontxt").innerHTML="First Quarter Moon";
+    return;
+  }
+  if (moonphase == 0.5 ){
+    document.getElementById("moontxt").innerHTML="Full Moon";
+    return
+  }
+  if (moonphase == 0.75){
+    document.getElementById("moontxt").innerHTML="Last Quarter Moon";
+    return;
+  }
+  if (moonphase < 0.25){
+    document.getElementById("moontxt").innerHTML="Waxing crescent";
+    return;
+  }
+  if (moonphase < 0.5){
+    document.getElementById("moontxt").innerHTML="Waxing Gibous";
+    return;
+  }
+  if (moonphase < 0.75){
+    document.getElementById("moontxt").innerHTML="Waning Gibous";
+    return;
+  }
+  if (moonphase < 1){
+    document.getElementById("moontxt").innerHTML="Waning Crescent";
+    return;
+  }
+}
+
+
+
 document.body.onload = function() {
-  sunState();
   display_t();
+  sunState();
 }

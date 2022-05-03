@@ -34,9 +34,17 @@
                                 dur="0.1s"
                                 repeatCount="1"
                                 fill="freeze"/>
-            
           </circle>
-          <circle cx="250" cy="250" r="10" fill="blue" stroke="black"/>
+          <defs>
+            <radialGradient id="moon_color" fx="50%" fy="50%" r="65%" spreadMethod="pad">
+              <stop offset="0%"   stop-color="#c9c9c9" stop-opacity="1"/>
+              <stop offset="100%" stop-color="#FFFEED" stop-opacity="1" />
+            </radialGradient>
+          </defs>
+          <circle cx="160 " cy="300" r="40" fill="url(#moon_color)" stroke="#c9c9c9"/>
+          <text id="moonTitle" x="230" y="300" fill="black" style= "font-family:Ubuntu; font-weight: bold; font-size:15;">Current moon phase:</text>
+          <text id="moontxt" x="230" y="330" fill="black" style="font-family:Ubuntu; font-weight: bold; font-size:15;">Moon phase</text>
+          <circle cx="250" cy="250" r="10" fill="blue" stroke="black" />
           <text id="clockhour" x="250" y="150" fill="red" style="text-anchor:middle; font-family:Ubuntu; font-weight: bold; font-size:35;">00 : 00</text>
           <rect x="240" y="110" width="20" height="130">
               <animateTransform attributeName="transform"
