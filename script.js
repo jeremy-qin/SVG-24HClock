@@ -1,51 +1,63 @@
+
+function getJSON(path, callback) {
+  var xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      callback(JSON.parse(xhr.responseText));
+    }
+  };
+  xhr.open('GET', path, true);
+  xhr.send();
+}
+
 function display_t() {
-    var refresh = 1000;
-    time = setTimeout("display_time()", refresh)
+  var refresh = 1000;
+  time = setTimeout(display_time, refresh)
 }
 
 function display_time() {
-    var date = new Date();
-    var y = date.getFullYear();
-    var m = date.getMonth();
-    var d = date.getDate();
+  var date = new Date();
+  var y = date.getFullYear();
+  var m = date.getMonth();
+  var d = date.getDate();
 
-    var mois = ["Janvier","Février", "Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"];
-    
-    switch (new Date().getDay()) {
-        case 0:
-          day = "Dimanche";
-          break;
-        case 1:
-          day = "Lundi";
-          break;
-        case 2:
-           day = "Mardi";
-          break;
-        case 3:
-          day = "Mercredi";
-          break;
-        case 4:
-          day = "Jeudi";
-          break;
-        case 5:
-          day = "Vendredi";
-          break;
-        case 6:
-          day = "Samedi";
-      }
+  var mois = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
 
-    var hour = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds(); 
+  switch (new Date().getDay()) {
+    case 0:
+      day = "Dimanche";
+      break;
+    case 1:
+      day = "Lundi";
+      break;
+    case 2:
+      day = "Mardi";
+      break;
+    case 3:
+      day = "Mercredi";
+      break;
+    case 4:
+      day = "Jeudi";
+      break;
+    case 5:
+      day = "Vendredi";
+      break;
+    case 6:
+      day = "Samedi";
+  }
 
-    document.getElementById("time").innerHTML = day + " " + d + " " + mois[m] + " " + y;
-    document.getElementById("clockhour").innerHTML = hour
-    time = display_t()
+  var hour = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+
+  document.getElementById("time").innerHTML = day + " " + d + " " + mois[m] + " " + y;
+  document.getElementById("clockhour").innerHTML = hour
+  time = display_t()
 }
 
 
 function formatHeure() {
 
 
-    const Hours = `
+  const Hours = `
                 <text x="250" y="80" fill="red" style="text-anchor:middle; font-family:Ubuntu; font-weight: bold; font-size:25;" transform="rotate(0 250 250)">0</text>
                 <text x="250" y="80" fill="red" style="text-anchor:middle; font-family:Ubuntu; font-weight: bold; font-size:25;" transform="rotate(15 250 250)">1</text>
                 <text x="250" y="80" fill="red" style="text-anchor:middle; font-family:Ubuntu; font-weight: bold; font-size:25;" transform="rotate(30 250 250)">2</text>
@@ -72,11 +84,11 @@ function formatHeure() {
                 <text x="250" y="80" fill="red" style="text-anchor:middle; font-family:Ubuntu; font-weight: bold; font-size:25;" transform="rotate(345 250 250)">23</text>
                 `
 
-    const element = document.getElementById("hours");
-    if (element.innerHTML == Hours) {
-        
-       while (element.hasChildNodes()) {
-        element.removeChild(element.firstChild);
+  const element = document.getElementById("hours");
+  if (element.innerHTML == Hours) {
+
+    while (element.hasChildNodes()) {
+      element.removeChild(element.firstChild);
     }
     const newHours = `
     <text x="250" y="80" fill="red" style="text-anchor:middle; font-family:Ubuntu; font-weight: bold; font-size:15;" transform="rotate(0 250 250)">0AM</text>
@@ -104,18 +116,33 @@ function formatHeure() {
     <text x="250" y="80" fill="red" style="text-anchor:middle; font-family:Ubuntu; font-weight: bold; font-size:15;" transform="rotate(330 250 250)">10PM</text>
     <text x="250" y="80" fill="red" style="text-anchor:middle; font-family:Ubuntu; font-weight: bold; font-size:15;" transform="rotate(345 250 250)">11PM</text>
     `
-    document.getElementById("hours").innerHTML = newHours 
-    }
-    else {
-        element.innerHTML = Hours
-    }
-    
+    document.getElementById("hours").innerHTML = newHours
+  }
+  else {
+    element.innerHTML = Hours
+  }
+
 }
 
-
-function changeTemp() {
-    const temp = document.getElementsByClassName("temps");
-    for (let i = 0; i < temp.length; i++) {
-        temp[i].innerHTML = 20;
-      }
+function chercherTemperatures() {
+  let h = new Date().getHours();
+  getJSON('https://api.openweathermap.org/data/2.5/onecall?lat=45.5028&lon=-73.608&units=metric&lang=fr&appid=f84f3dfb9089d7ca104d69ffca8d8fa0', function (data) {
+    for (let i = 0; i < 24; i++) {
+      if (h+i == 24)  h = -i;
+      document.getElementById("temp"+(h+i)).innerHTML = Math.round(data.hourly[i].temp)+"°C";
+    }
+  });    
 }
+
+function chercherMessageJSON() {
+  getJSON('https://www-labs.iro.umontreal.ca/~roys/ift1005/calendrier/test.php?cal=now%2C%2B5sec%2CBienvenue%21%0D%0A%2B5sec%2C%2B5sec%2CHorloge+SVG+r%C3%A9alis%C3%A9+par%0D%0A%2B5sec%2C%2B10sec%2CMehdi+Aqdim%0D%0A%2B15sec%2C%2B20sec%2CJeremy+Qin%0D%0A%2B20sec%2C%2B25sec%2CFrancisco+Lopez+Saavedra', function (data) {
+    for (let message of data) {
+      setTimeout(changerMessageTicker(message.message), (message.fin - message.debut)*1000);
+    }
+  });
+}
+function changerMessageTicker(message) {
+  document.getElementById("ticker").innerHTML += '<div class="hitem">'+message+'</div> ';
+}
+
+window.onload(chercherMessageJSON(), chercherTemperatures());
