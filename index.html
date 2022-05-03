@@ -15,7 +15,7 @@
     <div class="hmove" id="ticker">
     </div>
   </div>
-  <div>
+  <div style="display: flex;">
     <svg id="clock" xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500">
       <circle cx="250" cy="250" r="240" fill="moccasin" stroke="black" />
       <circle cx="250" cy="250" r="200" fill="moccasin" stroke="black" />
@@ -190,8 +190,10 @@
           transform="rotate(345 250 250)"></text>
       </g>
     </svg>
-    <p style="display: inline-block; border-style: dotted; font-size: xx-large;">Hi</p>
-  </div>
+    <p style="margin: 20px 20px 20px 60px; width: 400px; border-style: solid; padding: 20px; font-family: Lucida Sans; font-size: larger; text-align: justify; font-weight: bold;">Notre horloge faite en SVG contiennemt essentiellement trois cercles. Nous pouvons voir que le cercle le plus à l'intérieur contient 2 couleurs qui correspondent
+       au lever et coucher du soleil. De plus, nous pouvons voir l'heure présente en blanc. La phase de la lune est aussi présentée en dedans. Le prochain cercle contient en noir, les heures de la journée
+      numérotée de 0 à 23 (24 heures). En appuyant sur le bouton vert (12H | 24H), nous pouvons changer le formet de l'heure en 2 moitié (AM et PM) de 12 heures. Par la suite, le cercle le plus à l'extérieur contient les
+      températures à chauqe heure de la journée en blanc. Ceux-ci peuvent aussi changer de formet de Celsius à Fahrenheit en appuyant sur un bouton. </p>  </div>
   <br>
   <button class="buttons" type="button" onclick="formatHeure()"> 12H | 24H </button>
   <button class="buttons" type="button" onclick="changeTempUnit()"> C | F </button>
