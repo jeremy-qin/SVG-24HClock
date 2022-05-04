@@ -240,7 +240,7 @@ function sunState() {
       var srDate = new Date(daily[1].sunrise * 1000);
       var srHour = srDate.getHours();
       var srMin = srDate.getMinutes();
-      var srMinForm = srHour * 60 + srMin + 60;
+      var srMinForm = srHour * 60 + srMin;
       // sunset data
       var ssDate = new Date(daily[1].sunset * 1000);
       var ssHour = ssDate.getHours();
@@ -252,7 +252,7 @@ function sunState() {
       document.getElementById("day_circle").setAttribute("stroke-dasharray", (dayRatio * 502) + " 502");
       const degreeOffset = 90;
       // Positions the day circle
-      var daystart = ((srMinForm) / 1440) * 360;
+      var daystart = ((srMinForm+60) / 1440) * 360;
       document.getElementById("day_cycle_rotation").setAttribute("to", (daystart - degreeOffset) + " 250 250");
       var rotation = document.getElementById("day_cycle_rotation");
       rotation.beginElement();
@@ -263,13 +263,23 @@ function sunState() {
 }
 
 // handles data retrieved from Api, changes the html to show the current moon phase
+const newMoonSVG=`<circle cx="160 " cy="300" r="40" fill="black" stroke="#c9c9c9" />`
+const waningSVG=`<circle cx="160" cy="300" r="40" stroke="#c9c9c9" stroke-width="2" fill="url(#moon_color)" />
+<circle cx="175" cy="300" r="30" stroke="#c9c9c9" stroke-width="2" fill="yellow" />
+<circle cx="190" cy="300" r="23" stroke="yellow" stroke-width="2" fill="yellow" />`
+const waxingSVG=` <circle cx="160" cy="300" r="40" stroke="#c9c9c9" stroke-width="2" fill="url(#moon_color)" />
+<circle cx="190" cy="300" r="36" stroke="yellow" stroke-width="2" fill="yellow" />`
+const quarterSVG=`<circle cx="160" cy="300" r="40" stroke="#c9c9c9" stroke-width="2" fill="url(#moon_color)" />
+<rect x="160" y="255" width="45" height="90" fill="yellow"/>`
 function moonState(moonphase) {
   if (moonphase == 0 || moonphase == 1) {
     document.getElementById("moontxt").innerHTML = "New Moon";
+    document.getElementById("moon").innerHTML = newMoonSVG;
     return;
   }
   if (moonphase == 0.25) {
     document.getElementById("moontxt").innerHTML = "First Quarter Moon";
+    document.getElementById("moon").innerHTML = quarterSVG;
     return;
   }
   if (moonphase == 0.5) {
@@ -278,22 +288,27 @@ function moonState(moonphase) {
   }
   if (moonphase == 0.75) {
     document.getElementById("moontxt").innerHTML = "Last Quarter Moon";
+    document.getElementById("moon").innerHTML = quarterSVG;
     return;
   }
   if (moonphase < 0.25) {
     document.getElementById("moontxt").innerHTML = "Waxing crescent";
+    document.getElementById("moon").innerHTML = waxingSVG;
     return;
   }
   if (moonphase < 0.5) {
     document.getElementById("moontxt").innerHTML = "Waxing Gibous";
+    document.getElementById("moon").innerHTML = waxingSVG;
     return;
   }
   if (moonphase < 0.75) {
     document.getElementById("moontxt").innerHTML = "Waning Gibous";
+    document.getElementById("moon").innerHTML = waningSVG;
     return;
   }
   if (moonphase < 1) {
     document.getElementById("moontxt").innerHTML = "Waning Crescent";
+    document.getElementById("moon").innerHTML = waningSVG;
     return;
   }
 }
