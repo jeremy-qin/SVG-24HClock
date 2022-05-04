@@ -1,3 +1,8 @@
+body {
+margin: auto;
+max-width: 1000px;
+}
+
 #clock {
     background-color: aliceblue;
 }
@@ -15,8 +20,7 @@
     background-color: #4CAF50;
     font-size: 15px;
     font-weight: bold;
-    margin-right: 1cm;
-    margin-left: 1cm;
+    margin-left: 65px;
 }
 
 .hwrap {
@@ -46,12 +50,12 @@
     }
 
     100% {
-        transform: translate3d(-400%, 0, 0);
+        transform: translate3d(-500%, 0, 0);
     }
 }
 
 .hmove {
-    animation: tickerh linear 10s infinite;
+    animation: tickerh linear 20s infinite;
 }
 
 .hmove:hover {

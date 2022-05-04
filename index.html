@@ -7,7 +7,7 @@
   <meta charset="UTF-8">
 </head>
 
-<body onload="display_time()">
+<body>
   <div class="header">
     <h1 id="date"></h1>
   </div>
@@ -27,19 +27,25 @@
       </circle>
       <defs>
         <radialGradient id="moon_color" fx="50%" fy="50%" r="65%" spreadMethod="pad">
-          <stop offset="0%"   stop-color="#c9c9c9" stop-opacity="1"/>
+          <stop offset="0%" stop-color="#c9c9c9" stop-opacity="1" />
           <stop offset="100%" stop-color="#FFFEED" stop-opacity="1" />
         </radialGradient>
       </defs>
-      <circle cx="160 " cy="300" r="40" fill="url(#moon_color)" stroke="#c9c9c9"/>
-      <text id="moonTitle" x="230" y="300" fill="black" style= "font-family:Ubuntu; font-weight: bold; font-size:15;">Current moon phase:</text>
-      <text id="moontxt" x="230" y="330" fill="black" style="font-family:Ubuntu; font-weight: bold; font-size:15;">Moon phase</text>
+      <circle cx="160 " cy="300" r="40" fill="url(#moon_color)" stroke="#c9c9c9" />
+      <text id="moonTitle" x="230" y="300" fill="black"
+        style="font-family:Ubuntu; font-weight: bold; font-size:15;">Current moon phase:</text>
+      <text id="moontxt" x="230" y="330" fill="black" style="font-family:Ubuntu; font-weight: bold; font-size:15;">Moon
+        phase</text>
       <circle cx="250" cy="250" r="10" fill="black" stroke="white" />
       <text id="clockhour" x="250" y="200" fill="white" stroke="black" stroke-width="2"
         style="text-anchor:middle; font-family:Lucida Sans; font-weight: bold; font-size:3.5rem;"></text>
-      <rect x="247.5" y="110" width="5" height="130" stroke="white">
-        <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 250 250" to="360 250 250"
-          dur="60s" repeatCount="indefinite" />
+      <rect id="aiguille-seconde" x="247.5" y="100" width="5" height="140" stroke="white">
+        <!-- <animateTransform attributeName="transform" attributeType="XML" type="rotate" dur="60s" repeatCount="indefinite" />
+      -->
+      </rect>
+      <rect id="aiguille-minute" x="245" y="110" width="7" height="130" stroke="white">
+      </rect>
+      <rect id="aiguille-heure" x="245" y="130" width="10" height="110" stroke="white">
       </rect>
       <g id="hours">
         <text x="250" y="80" fill="black"
@@ -190,10 +196,17 @@
           transform="rotate(345 250 250)"></text>
       </g>
     </svg>
-    <p style="margin: 20px 20px 20px 60px; width: 400px; border-style: solid; padding: 20px; font-family: Lucida Sans; font-size: larger; text-align: justify; font-weight: bold;">Notre horloge faite en SVG contiennemt essentiellement trois cercles. Nous pouvons voir que le cercle le plus à l'intérieur contient 2 couleurs qui correspondent
-       au lever et coucher du soleil. De plus, nous pouvons voir l'heure présente en blanc. La phase de la lune est aussi présentée en dedans. Le prochain cercle contient en noir, les heures de la journée
-      numérotée de 0 à 23 (24 heures). En appuyant sur le bouton vert (12H | 24H), nous pouvons changer le formet de l'heure en 2 moitié (AM et PM) de 12 heures. Par la suite, le cercle le plus à l'extérieur contient les
-      températures à chauqe heure de la journée en blanc. Ceux-ci peuvent aussi changer de formet de Celsius à Fahrenheit en appuyant sur un bouton. </p>  </div>
+    <p
+      style="margin: auto; margin-right: 0%; width: 400px; border-style: solid; padding: 20px; font-family: Lucida Sans; font-size: larger; text-align: justify; font-weight: bold; background-color: aliceblue;">
+      Notre horloge faite en SVG offre toutes les fonctionnalités requises.<br> Le cercle derrière les
+      aiguilles indique les heures pendant lesquelles il fait nuit en bleu (soleil couché) et les heures pendant
+      lesquelles il fait jour en jaune (soleil levé).
+      La phase de la lune est aussi présentée à l'intérieur. Le prochain cercle contient en noir, les heures de la journée
+      numérotée de 0 à 23 (24 heures). En appuyant sur le bouton (12H | 24H), nous pouvons changer le format de
+      l'heure en 2 moitié (AM et PM) de 12 heures. <br> Le cercle à l'extérieur contient les
+      températures à chaque heure de la journée. Ceux-ci peuvent aussi changer d'unité de Celsius à
+      Fahrenheit en appuyant sur le bouton (C | F). </p>
+  </div>
   <br>
   <button class="buttons" type="button" onclick="formatHeure()"> 12H | 24H </button>
   <button class="buttons" type="button" onclick="changeTempUnit()"> C | F </button>
