@@ -40,10 +40,8 @@
         phase</text>
       <circle cx="250" cy="250" r="10" fill="black" stroke="white" />
       <text id="clockhour" x="250" y="200" fill="white" stroke="black" stroke-width="2"
-        style="text-anchor:middle; font-family:Lucida Sans; font-weight: bold; font-size:3.5rem;"></text>
+        style="text-anchor:middle; font-family:Lucida Sans; font-weight: bold; font-size:3rem;"></text>
       <rect id="aiguille-seconde" x="247.5" y="100" width="5" height="140" stroke="white">
-        <!-- <animateTransform attributeName="transform" attributeType="XML" type="rotate" dur="60s" repeatCount="indefinite" />
-      -->
       </rect>
       <rect id="aiguille-minute" x="245" y="110" width="7" height="130" stroke="white">
       </rect>
@@ -200,14 +198,16 @@
     </svg>
     <p
       style="margin: auto; margin-right: 0%; width: 400px; border-style: solid; padding: 20px; font-family: Lucida Sans; font-size: larger; text-align: justify; font-weight: bold; background-color: aliceblue;">
+      <span style="font-size: 1.5rem; text-align: center;">TriClock:</span><br>
       Notre horloge faite en SVG offre toutes les fonctionnalités requises.<br> Le cercle derrière les
       aiguilles indique les heures pendant lesquelles il fait nuit en bleu (soleil couché) et les heures pendant
       lesquelles il fait jour en jaune (soleil levé).
-      La phase de la lune est aussi présentée à l'intérieur. Le prochain cercle contient en noir, les heures de la journée
-      numérotée de 0 à 23 (24 heures). En appuyant sur le bouton (12H | 24H), nous pouvons changer le format de
-      l'heure en 2 moitié (AM et PM) de 12 heures. <br> Le cercle à l'extérieur contient les
+      La phase de lune actuel est aussi affichée à l'intérieur.<br>Le premier disque contient les 24 heures de la
+      journée. En appuyant sur le bouton (12H | 24H), nous pouvons changer le 
+      format de l'heure en AM/PM ou vice versa. <br> Le cercle à l'extérieur contient les
       températures à chaque heure de la journée. Ceux-ci peuvent aussi changer d'unité de Celsius à
-      Fahrenheit en appuyant sur le bouton (C | F). </p>
+      Fahrenheit en appuyant sur le bouton (C | F) ou vice versa. 
+    </p>
   </div>
   <br>
   <button class="buttons" type="button" onclick="formatHeure()"> 12H | 24H </button>

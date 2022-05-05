@@ -1,6 +1,6 @@
 body {
-margin: auto;
-max-width: 1000px;
+    margin: auto;
+    max-width: 1000px;
 }
 
 #clock {
@@ -43,7 +43,7 @@ max-width: 1000px;
     font-weight: bolder;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
- 
+
 @keyframes tickerh {
     0% {
         transform: translate3d(100%, 0, 0);
